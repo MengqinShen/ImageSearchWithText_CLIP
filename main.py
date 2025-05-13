@@ -12,6 +12,7 @@ from data_downloader import download_data
 from data_processor import process_data
 from model_image_search import image_search
 from gemini_ranker import gemini_rank
+
 from pathlib import Path
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
