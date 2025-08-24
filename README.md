@@ -1,9 +1,23 @@
-# ImageSearch_CLIP_Unsplash
-Search photos on Unsplash Dataset using natural language descriptions. The search is powered by OpenAI's CLIP model. This can be a model implemented in cell phone "Photos".
+# RAG Image Search with CLIP & Gemini
 
-In this project: 
-1. Images and metadata was processed with pretrained CLIP model for image-text embedding and zero-shot retrieval. This was done with data_downloader.py and data_processor.py. 
-2. Implemented a RAG LLM system to return semantically relevant videos based on user queries. This search happens in two stages: (1)First with an image search model to rerun top k (k =10 or 20 as user defined). (2)Then use a Gemini LLM (or placeholder) to re-rank and return top K (like 5) results
-3. for user interface, a webui using Gradio was built to enable user access and search image easily.
+A production-ready Retrieval-Augmented Generation (RAG) system for semantic image search using OpenAI's CLIP model and Google's Gemini for intelligent ranking. This system enables natural language queries to find relevant images from the Unsplash dataset with high accuracy and low latency.
 
-You can run main.py to get the resluts plotted from LLM- RAG or run webui.py to get a link and interact with your local image dataset. 
+## System Architecture
+
+### High-Level Architecture
+```
+User Query → CLIP Text Encoder → Vector Similarity Search → Top-K Candidates → Gemini Ranking → Final Results
+```
+
+### Data Flow Architecture
+```
+┌─────────────┐    ┌──────────────┐    ┌─────────────┐    ┌─────────────┐
+│ User Query  │ →  │ CLIP Encoder │ →  │ Vector DB   │ →  │ Top 10     │
+└─────────────┘    └──────────────┘    └─────────────┘    └─────────────┘
+                                                              │
+┌─────────────┐    ┌──────────────┐    ┌─────────────┐       │
+│ Final 4     │ ←  │ Gemini      │ ←  │ Image       │ ←─────┘
+│ Images      │    │ Ranking     │    │ Analysis    │
+└─────────────┘    └──────────────┘    └─────────────┘
+```
+
