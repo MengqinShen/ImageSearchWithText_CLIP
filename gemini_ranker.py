@@ -4,7 +4,7 @@ import re
 
 def gemini_rank(best_photo_ids_raw,file_path,version,search_query,results_count_final):
     # Your Gemini API key
-    genai.configure(api_key="Your Gemini API key")
+    genai.configure(api_key="AIzaSyAG0e3dDK_6O4dcBxJ_bBZ0AtLegdTjurE")
     model = genai.GenerativeModel("gemini-1.5-flash")
     images = []
     for i, photo_id in enumerate(best_photo_ids_raw):
